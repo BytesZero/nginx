@@ -1,0 +1,51 @@
+version: '3.9'
+
+services:
+  rust_api1:
+    image: rust_api
+    ports:
+      - "8080:8080"
+    networks:
+      - nginx_net
+
+  rust_api2:
+    image: rust_api
+    ports:
+      - "8081:8080"
+    networks:
+      - nginx_net
+
+  rust_api3:
+    image: rust_api
+    ports:
+      - "8082:8080"
+    networks:
+      - nginx_net
+
+  rust_api4:
+    image: rust_api
+    ports:
+      - "8083:8080"
+    networks:
+      - nginx_net
+
+  rust_api5:
+    image: rust_api
+    ports:
+      - "8084:8080"
+    networks:
+      - nginx_net
+
+  nginx:
+    image: nginx
+    ports:
+      - "80:80"
+    networks:
+      - nginx_net
+    volumes:
+      - ./limits.conf:/etc/security/limits.conf # 限制文件打开数
+      - ./nginx.conf:/etc/nginx/nginx.conf # ngix配置文件
+      - ./default.conf:/etc/nginx/conf.d/default.conf # ngix配置文件
+
+networks:
+  nginx_net:
